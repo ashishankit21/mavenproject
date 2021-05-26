@@ -1,0 +1,29 @@
+pipeline {
+ agent any
+  stages {
+      stage('pull') {
+         steps {
+            git 'https://github.com/ashishankit21/mavenproject.git'
+         }
+      }
+      stage('Compile') {
+         steps {
+            bat 'mvn compile'
+         }
+      stage('Test') {
+         steps {
+            bat 'mvn test'
+         }
+      }
+      stage('Package') {
+         steps {
+            bat 'mvn package'
+         }
+      }
+      stage('Execute') {
+         steps {
+            bat 'java -jar "C:\Windows\System32\config\systemprofile\AppData\Local\Jenkins\.jenkins\workspace\cts_pipeline\target>java -jar cts-1.0-SNAPSHOT.jar"'
+         }
+      }
+   }
+}
